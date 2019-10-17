@@ -92,3 +92,52 @@ fichas=3
             print('Você ganhou o jogo (BLACKJACK), mais duas fichas e mais {0} dólares pelo sorteio MADNESS.'.format(madness))
             print('Seu saldo é agora de {0}'.format(saldo))
             
+         while soma_de_cartas<21:
+            escolha=input('Você deseja parar ou continuar? (p/c) ')
+            
+            aposta_extra=input('Aceita aumentar sua aposta? (s/n) (saldo: {0}) '.format(saldo))
+            if aposta_extra=='s' or aposta_extra=='S':
+                aumento=int(input('Qual será o valor do aumento? '))
+                if aumento<=saldo:
+                    saldo-=aumento
+                    valor_apostado+=aumento
+                else:
+                    print('Aumento de aposta inválido')
+            input('Saldo atual: {0} // Aposta atual: {1} (aperte enter/return)\n'.format(saldo,valor_apostado))
+            if escolha=='p' or escolha=='P':
+                cartas_dealer=dealer()
+                if cartas_dealer>21:
+                    saldo=valor_apostado*2.5+saldo
+                    fichas+=1
+                    print('\nO dealer estourou, você ganhou 1.5 do que apostou e mais uma ficha. Seu saldo é de {0}.'.format(saldo))
+                    break
+                if cartas_dealer==soma_de_cartas:
+                    saldo+=valor_apostado
+                    fichas+=1
+                    print('\nHouve empate, você ganhou mais uma ficha e sua aposta de volta. Seu saldo é agora de {0}.'.format(saldo))
+                elif cartas_dealer>soma_de_cartas:
+                    print('\nO dealer ganhou e seu saldo agora é de {0}.'.format(saldo))
+                else:
+                    saldo+=2*valor_apostado
+                    fichas+=1
+                    print('\nVocê ganhou o equivalente ao que apostou e mais uma ficha. Seu saldo agora é de {0}.'.format(saldo))
+                break
+            elif escolha=='c' or escolha=='C':
+                nova_carta=retorna_carta(cartas_embaralhadas)
+                soma_de_cartas+=nova_carta
+                if soma_de_cartas==21:
+                    saldo+=valor_apostado*2.5
+                    fichas+=2
+                    print('\nVocê ganhou o jogo (BLACKJACK), mais duas fichas e mais {0} dólares pelo sorteio MADNESS.'.format(madness()))
+                    break
+            print('Sua nova carta é: {0} (soma: {1}).\n'.format(nova_carta,soma_de_cartas))
+        
+        if soma_de_cartas>21:
+            print('\nVocê estourou! Seu saldo agora é de {0}.'.format(saldo))   
+        if saldo!=0 or fichas!=0:    
+            play_again=input('**Você possui {0} fichas. Deseja jogar novamente? (s/n)** '.format(fichas))
+        elif saldo==0:
+            print('Seu dinheiro acabou...')
+        else:
+            print('Suas fichas acabaram...')
+print('\n**Voce terminou o jogo com {0}'.format(saldo))
