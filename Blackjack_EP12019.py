@@ -99,6 +99,33 @@ while play_again=='s' and fichas>0 and baralhos<=4 and baralhos>0:
             
             if soma_de_cartas==21:
                 madness=madness()
+                madness=madness()
+                dic_jogadores_por_saldo[p]+=(valor_apostado*2.5)+madness
+                fichas+=2
+                print('Você ganhou o jogo (BLACKJACK), mais duas fichas e mais {0} dólares pelo sorteio MADNESS.'.format(madness))
+                print('Seu saldo é agora de {0},{1}'.format(dic_jogadores_por_saldo[p],p))
+                
+            while soma_de_cartas<21:
+                escolha=input('Você deseja parar ou continuar {0}?(p/c) '.format(p))
+                aposta_extra=input('Aceita aumentar sua aposta {1} ? (s/n) (saldo: {0}) '.format(dic_jogadores_por_saldo[p],p))
+                if aposta_extra=='s' or aposta_extra=='S':
+                    aumento=int(input('Qual será o valor do aumento {0}? '.format(p)))
+                    if aumento<=dic_jogadores_por_saldo[p]:
+                        dic_jogadores_por_saldo[p]-=aumento
+                        valor_apostado+=aumento
+                    else:
+                        print('Aumento de aposta inválido')
+                input('Saldo atual: {0} // Aposta atual: {1} (aperte enter/return)\n'.format(dic_jogadores_por_saldo[p],valor_apostado))
+            if escolha=='p' or escolha=='P':
+                cartas_dealer=dealer()
+                if cartas_dealer>21:
+                    dic_jogadores_por_saldo[p]=valor_apostado*2.5+dic_jogadores_por_saldo[p]
+                    fichas+=1
+                    print('O dealer estourou, você ganhou o equivalente ao que apostou e mais uma ficha. Seu saldo é de {0} {1}'.format(dic_jogadores_por_saldo[p],p))
+                    break
+                if cartas_dealer==soma_de_cartas:
+                    dic_jogadores_por_saldo[p]+=valor_apostado
+                    fichas+=1
  
  
  
