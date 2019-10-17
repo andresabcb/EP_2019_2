@@ -45,3 +45,50 @@ if baralhos<1 or baralhos>4:
     print('Quantidade de baralhos não disponível, jogo definido com 1 baralho')
 fichas=3
  
+ while play_again=='s' and fichas>0 and baralhos<=4 and baralhos>0:
+    clear()
+    
+    fichas-=1
+    valor_apostado=0
+    J = 10
+    Q = 10
+    K = 10
+    A = 1
+    deck_de_cartas = [2,3,4,5,6,7,8,9,10,J,Q,K,A]*4*baralhos
+    
+    valor_apostado=input('Você possui {0} dólares. Qual será o valor da sua aposta? (mínimo: 15) '.format(saldo))
+    
+    if valor_apostado=='fim' or valor_apostado=='Fim':
+        break
+    
+    valor_apostado=int(valor_apostado)
+    
+    if valor_apostado>saldo or valor_apostado<15:
+        print('Valor escolhido fora de alcance.')
+        valor_apostado=input('Você possui {0} dólares. Qual será o valor da sua aposta? (mínimo: 15) '.format(saldo))
+        if valor_apostado=='fim' or valor_apostado=='Fim':
+            print('Fim do jogo')
+            break
+    else: 
+        saldo=saldo-valor_apostado
+        cartas_embaralhadas=(embaralha_cartas(deck_de_cartas))
+        carta1=retorna_carta(cartas_embaralhadas)
+        carta2=retorna_carta(cartas_embaralhadas)
+        soma_de_cartas=carta1+carta2
+        if carta1==A:
+            if soma_de_cartas+10<=21:
+                carta1=11
+                soma_de_cartas+=10
+        if carta2==A:
+            if soma_de_cartas+10<=21:
+                carta2=11
+                soma_de_cartas+=10
+        print('Suas cartas iniciais são: {0} e {1} (soma: {2})'.format(carta1,carta2,soma_de_cartas))
+        
+        if soma_de_cartas==21:
+            madness=madness()
+            saldo+=(valor_apostado*2.5)+madness
+            fichas+=2
+            print('Você ganhou o jogo (BLACKJACK), mais duas fichas e mais {0} dólares pelo sorteio MADNESS.'.format(madness))
+            print('Seu saldo é agora de {0}'.format(saldo))
+            
