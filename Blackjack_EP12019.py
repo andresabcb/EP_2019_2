@@ -45,7 +45,7 @@ if baralhos<1 or baralhos>4:
     print('Quantidade de baralhos não disponível, jogo definido com 1 baralho')
 fichas=3
  
- while play_again=='s' and fichas>0 and baralhos<=4 and baralhos>0:
+while play_again=='s' and fichas>0 and baralhos<=4 and baralhos>0:
     clear()
     
     fichas-=1
@@ -92,7 +92,7 @@ fichas=3
             print('Você ganhou o jogo (BLACKJACK), mais duas fichas e mais {0} dólares pelo sorteio MADNESS.'.format(madness))
             print('Seu saldo é agora de {0}'.format(saldo))
             
-         while soma_de_cartas<21:
+        while soma_de_cartas<21:
             escolha=input('Você deseja parar ou continuar? (p/c) ')
             
             aposta_extra=input('Aceita aumentar sua aposta? (s/n) (saldo: {0}) '.format(saldo))
