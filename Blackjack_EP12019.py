@@ -45,6 +45,32 @@ while contador < len(jogadores):
  
 for i in range(0,len(jogadores)):
     dic_jogadores_por_saldo[jogadores[i]] = lista_saldo_jogadores[i]
+
+ 
+""" saldo_inicial=100
+saldo=saldo_inicial """
+play_again='s'
+print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n **Você possui 3 fichas. Cada jogo gastará 1 delas**')
+baralhos=int(input('\n Com quantos baralhos você deseja jogar? (1-4) '))
+if baralhos<1 or baralhos>4:
+    baralhos=1
+    print('Quantidade de baralhos não disponível, jogo definido com 1 baralho')
+fichas=3
+ 
+while play_again=='s' and fichas>0 and baralhos<=4 and baralhos>0:
+    fichas-=1
+    valor_apostado=0
+    J = 10
+    Q = 10
+    K = 10
+    A = 1
+    deck_de_cartas = [2,3,4,5,6,7,8,9,10,J,Q,K,A]*4*baralhos
+    for p in dic_jogadores_por_saldo:
+ 
+        valor_apostado=input('Você possui {0} dólares. Qual será o valor da sua aposta {1}? (mínimo: 15) '.format(dic_jogadores_por_saldo[p],p))
+        
+        if valor_apostado=='fim' or valor_apostado=='Fim':
+            break
  
  
  
