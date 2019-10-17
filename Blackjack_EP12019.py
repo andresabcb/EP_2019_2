@@ -71,6 +71,34 @@ while play_again=='s' and fichas>0 and baralhos<=4 and baralhos>0:
         
         if valor_apostado=='fim' or valor_apostado=='Fim':
             break
+              
+        valor_apostado=int(valor_apostado)
+        
+        if valor_apostado>dic_jogadores_por_saldo[p] or valor_apostado<15:
+            print('Valor escolhido fora de alcance.')
+            valor_apostado=input('Você possui {0} dólares. Qual será o valor da sua aposta {1}? (mínimo: 15) '.format(dic_jogadores_por_saldo[p],p))
+            if valor_apostado=='fim' or valor_apostado=='Fim':
+                print('Fim do jogo')
+                break
+               
+        else: 
+            dic_jogadores_por_saldo[p]=dic_jogadores_por_saldo[p]-valor_apostado
+            cartas_embaralhadas=(embaralha_cartas(deck_de_cartas))
+            carta1=retorna_carta(cartas_embaralhadas)
+            carta2=retorna_carta(cartas_embaralhadas)
+            soma_de_cartas=carta1+carta2
+            if carta1==A:
+                if soma_de_cartas+10<=21:
+                    carta1=11
+                    soma_de_cartas+=10
+            if carta2==A:
+                if soma_de_cartas+10<=21:
+                    carta2=11
+                    soma_de_cartas+=10
+            print('Suas cartas iniciais são: {0} e {1}, {3} (soma: {2})'.format(carta1,carta2,soma_de_cartas,p))
+            
+            if soma_de_cartas==21:
+                madness=madness()
  
  
  
