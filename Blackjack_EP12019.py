@@ -24,3 +24,29 @@ def dealer():
  
 def madness():
     sorteio = random.randint(5,100)
+    return sorteio
+ 
+ 
+pergunta_quantos_jogares = input('quantos jogadores na partida? ')
+ 
+jogadores = []
+lista_saldo_jogadores = []
+i = 0
+contador = 0
+dic_jogadores_por_saldo = {}
+ 
+while i != int(pergunta_quantos_jogares):
+    nome_do_jogador = input('nome do jogador {0} '.format(i+1)) 
+    jogadores.append(nome_do_jogador)
+    i += 1
+while contador < len(jogadores):
+    lista_saldo_jogadores.append(100)
+    contador+=1
+ 
+for i in range(0,len(jogadores)):
+    dic_jogadores_por_saldo[jogadores[i]] = lista_saldo_jogadores[i]
+ 
+ 
+ 
+ 
+ 
